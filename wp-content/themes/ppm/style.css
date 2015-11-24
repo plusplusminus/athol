@@ -11,12 +11,12 @@ Text Domain: canvas-ppm
 */
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: "freight-display-pro",sans-serif !important;
+	font-family: "freight-display-pro",serif !important;
 	font-weight: 500 !important;
 }
 
 body, p {
-	font-family: "freight-display-pro",sans-serif !important;
+	font-family: "freight-display-pro",serif !important;
 	font-weight: 500 !important;
 }
 
@@ -41,12 +41,17 @@ body, p {
 }
 
 ul.nav li a {
-	font-family: "freight-display-pro",sans-serif !important;
+	font-family: "freight-display-pro",serif !important;
 	font-weight: 400 !important;
 }
 
 ul.nav li a:hover,
-li.current-menu-item a{
+ul.nav li.current-menu-item a,
+ul.nav li.current_page_item a,
+ul.nav li.current_page_parent a,
+ul.nav li.current-menu-ancestor a,
+ul.nav li.current-cat a,
+ul.nav li.current-menu-item a{
 	color: #5a5a5a !important;
 }
 
@@ -58,9 +63,74 @@ ul.nav li a::after{
 }
 
 ul.nav li a:hover::after,
-li.current-menu-item a::after{
+li.current-menu-item a::after,
+ul.nav li.current_page_item a::after,
+ul.nav li.current_page_parent a::after,
+ul.nav li.current-menu-ancestor a::after,
+ul.nav li.current-cat a::after,
+ul.nav li.current-menu-item a::after{
 	background-color: #5a5a5a !important;
 }
+
+/*Center Primary Nav*/
+#navigation {
+	position: relative;
+}
+
+#main-nav {
+	clear: left;
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	left: 50%;
+	text-align: center;
+}
+
+.nav li {
+	display: block;
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	right: 50%;
+}
+
+.nav li:hover, .nav li.hover {
+	position: relative;
+}
+
+.nav li ul li {
+	left: 0;
+}
+
+
+/*Posts*/
+.post-meta{
+	font-family: "freight-neo-pro", sans-serif !important;	
+}
+
+.post-more{
+	font-family: "freight-neo-pro", sans-serif !important;
+}
+
+.post-more .read-more a:hover{
+	border-bottom: 1px solid #5a5a5a;
+	text-decoration: none;
+}
+
+abbr{
+	border-bottom: none !important;
+	cursor: default !important;
+}
+
+.post-meta a:link, .post-meta a:visited, .post p.tags a:link, .post p.tags a:visited{
+	font-weight: normal;
+}
+
+/*Footer*/
 
 #footer {
 	background: url(images/atholfooter.jpg) top center no-repeat; 
@@ -70,13 +140,61 @@ li.current-menu-item a::after{
 	padding: 0;
 }
 
-#copyright {
-	text-align: center;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
+#footer-widgets{
+	padding-top: 60px;
 }
 
+.footer-social{
+	text-align: center;
+}
+
+.footer-social__item{
+	display: inline-block;
+	padding: 10px;
+	font-size: 16px;
+	font-family: "freight-neo-pro", sans-serif;
+}
+
+.footer-social__item a{
+	color: #5a5a5a;
+}
+
+.footer-social__item a:hover{
+	border-bottom: 1px solid #5a5a5a;
+	text-decoration: none !important;
+}
+
+#copyright {
+	text-align: center;
+	width: 100%;
+	margin-top: 150px;
+}
+
+/*Footer Menu*/
+
+.widget_nav_menu{
+	margin-bottom: 0px;
+}
+
+#menu-footer-menu{
+	text-align: center;
+}
+
+#menu-footer-menu .menu-item{
+	display: inline-block;
+	font-size: 16px;
+	padding: 10px;
+	font-family: "freight-neo-pro", sans-serif;
+}
+
+#menu-footer-menu .menu-item a{
+
+}
+
+#menu-footer-menu .menu-item a:hover{
+	text-decoration: none;
+	border-bottom: 1px solid #5a5a5a;
+}
 
 /****************** GRAVITY FORMS *****************/
 
@@ -85,6 +203,8 @@ li.current-menu-item a::after{
 .gform_wrapper .gform_heading {
 	font-size: 20px;
 	text-align: center;
+	width: 100% !important;
+	font-family: "freight-display-pro",serif !important;
 }
 
 .gform_wrapper .gform_body .gform_fields .gfield input[type=text] {
@@ -96,10 +216,15 @@ li.current-menu-item a::after{
 	font-size: 16px;
 }
 
+.gform_wrapper .gform_footer{
+	padding-top: 0px;
+	margin-top: 0px;
+}
+
 .gform_wrapper .gform_footer input[type=submit] {
-	font-family: "freight-neo-pro";
+	font-family: "freight-neo-pro", sans-serif;
     color: #5a5a5a !important;
-    border: none;
+    border: 1px solid transparent;
     font-size: 17px !important;
     background: none;
     font-weight: 400;
@@ -107,9 +232,17 @@ li.current-menu-item a::after{
     box-shadow: none;
     -webkit-box-shadow: none;
     border-radius: 0;
+    padding: 0px;
+}
+.gform_wrapper .gform_footer input[type=submit]:hover {
+	border-bottom: 1px solid #5a5a5a;
 }
 
 /*Newsletter Form*/
+
+#gform_wrapper_1{
+	max-width: 100%;
+}
 
 #gform_wrapper_1 .gform_footer {
 	text-align: center;
