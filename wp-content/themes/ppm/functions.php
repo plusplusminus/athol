@@ -137,66 +137,38 @@ function ppm_register_repeatable_group_field_metabox() {
 	 */
 
 	$cmb_group->add_group_field( $group_field_id, array(
-		'name' => __( 'Print Image', 'cmb2' ),
+		'name' => __( 'Image Image', 'cmb2' ),
 		'id'   => $prefix . 'image',
 		'type' => 'file',
 	) );
 
 
 	$cmb_group->add_group_field( $group_field_id, array(
-		'name' => __( 'Print Caption', 'cmb2' ),
-		'id'   => $prefix . 'image_caption',
+		'name' => __( 'Image Title', 'cmb2' ),
+		'id'   => $prefix . 'image_title',
 		'type' => 'text',
 	) );
 
 	$cmb_group->add_group_field( $group_field_id, array(
-		'name'        => __( 'Print Description', 'cmb2' ),
-		'description' => __( 'Insert print description.', 'cmb2' ),
-		'id'          => 'description',
+		'name'        => __( 'Image Description', 'cmb2' ),
+		'description' => __( 'Insert image description.', 'cmb2' ),
+		'id'          => $prefix . 'image_description',
 		'type'        => 'textarea_small',
 	) );
 
 	$cmb_group->add_group_field( $group_field_id, array(
-		'name' => __( 'Print Size', 'cmb2' ),
-		'id'   => 'print-size',
+		'name' => __( 'Image Sizes and Prices', 'cmb2' ),
+		'id'   => $prefix . 'image_size',
 		'type' => 'text',
-		'repeatable' => true,
+		'description' => 'eg: 36 x 64cm (Ed50) R6,500',
+		'repeatable' => 'true',
 	) );
 
 	$cmb_group->add_group_field( $group_field_id, array(
-		'name' => __( 'Print Price', 'cmb2' ),
-		'id'   => 'print_price',
-		'type' => 'text',
-		'repeatable' => true,
-	) );
-
-	$cmb_group->add_group_field( $group_field_id, array(
-		'name'     => __( 'Collection Category', 'cmb2' ),
-		'desc'     => __( 'Select relevant collection.', 'cmb2' ),
-		'id'       => $prefix . 'taxonomy_select',
-		'type'     => 'taxonomy_select',
-		'taxonomy' => 'category', // Taxonomy Slug
-	) );
-
-
-	$cmb_group->add_group_field( $group_field_id, array(
-		'name'             => __( 'Collection', 'cmb2' ),
-		'desc'             => __( 'Select relevant collection.', 'cmb2' ),
-		'id'               => $prefix . 'select',
-		'type'             => 'select',
-		'show_option_none' => true,
-		'options'          => array(
-			'standard' => __( 'Option One', 'cmb2' ),
-			'custom'   => __( 'Option Two', 'cmb2' ),
-			'none'     => __( 'Option Three', 'cmb2' ),
-		),
-	) );
-
-	$cmb_group->add_group_field( $group_field_id, array(
-		'name' => __( 'Buy Link', 'cmb2' ),
-		'desc' => __( 'Insert link where users can buy print(s).', 'cmb2' ),
-		'id'   => $prefix . 'url',
-		'type' => 'text_url',
+		'name' => __( 'Is this image for sale?', 'cmb2' ),
+		'desc' => __( 'If checkbox is selected, a "buy now" link will appear below the image', 'cmb2' ),
+		'id'   => $prefix . 'image_buy',
+		'type' => 'checkbox',
 		// 'protocols' => array('http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet'), // Array of allowed protocols
 		// 'repeatable' => true,
 	) );
@@ -318,6 +290,23 @@ function ppm_register_theme_options_metabox() {
 
 // Project Hooks / Filters
 
+add_filter( 'projects_loop_columns', 'jk_projects_columns', 99 );
+function jk_projects_columns( $cols ) {
+	$cols = 2;
+	return $cols;
+}
+
+// Remove Single Project gallery
+remove_action( 'projects_before_single_project_summary', 'projects_template_single_gallery', 40 );
+
+// Remove Cover
+remove_action( 'projects_before_single_project_summary', 'projects_template_single_feature', 30 );
+
+// Remove Meta
+remove_action( 'projects_single_project_summary', 'projects_template_single_meta', 20 );
+
+
+// Add Custom Project Meta
 add_action( 'projects_after_single_project_summary', 'projects_meta', 12 );
 
 function projects_meta () {
@@ -327,16 +316,93 @@ function projects_meta () {
     
 	foreach ( (array) $entries as $key => $entry ) {
 
-	    $img = $title = $desc = $image_caption = '';
+	    $img = $image_title = $image_description = $image_size = $image_buy = '';
 
-	    if ( isset( $entry['_ppm_image_caption'] ) )
-	        $image_caption = wpautop( $entry['_ppm_image_caption'] );
+		if ( isset( $entry['_ppm_image_id'] ) ) {
+		    $img = wp_get_attachment_image( $entry['_ppm_image_id'], 'full', null, array(
+		        'class' => 'project-details__img',
+		    ) );
+		 }
+
+	    if ( isset( $entry['_ppm_image_title'] ) )
+	        $image_title = $entry['_ppm_image_title'];
+
+	   	if ( isset( $entry['_ppm_image_description'] ) )
+	        $image_description = $entry['_ppm_image_description'];
+
+    	if ( isset( $entry['_ppm_image_size'] ) )
+			$image_size = $entry['_ppm_image_size'];
+
+    	if ( isset( $entry['_ppm_image_buy'] ) )
+        	$image_buy = $entry['_ppm_image_buy'];
+
+	    $image_sizes = get_post_meta( $post->ID, '_ppm_image_size', true );
 		
-		if ( isset( $entry['_ppm_image_caption'] ) ) {
-            echo $image_caption;
+		if ( isset( $entry['_ppm_image_title'] ) ) { ?>
+			<div class="project-details">
+				<?php echo $img; ?>
+	            <h3 class="project-details__title">Title: <?php echo $image_title; ?></h3>
+	            <p>Collection: Collection Name Here XXX</p>
+	            <p class="project-details__description"><?php echo $image_description; ?></p>
+	            <?php if ( isset( $entry['_ppm_image_size'] ) ) { ?>
+	            	<p>Size: <?php echo implode(" &mdash; ",$entry['_ppm_image_size']); ?></p>
+	            <?php } ?>
+	            <?php if ($image_buy == "on") { ?>
+	            	<a class="project-details__buy" href="http://localhost/athol/purchase-enquiry/">Buy Now</a>
+				<?php } ?>
+	        </div>
+	        <?php 
         }
     }
 } // End woo_hook_content_loop_after()
 
+// Gravity forms dynamic population
+// Image Title
+add_filter( 'gform_field_value_image_title', 'my_custom_population_function' );
+function my_custom_population_function( $value ) {
+	    global $post;
+	    $entries = get_post_meta( $post->ID, '_ppm_project_group', true );
+		
+		foreach ( (array) $entries as $key => $entry ) {
+		    $image_title = $image_description = $image_size = $image_buy = '';}
 
+		    if ( isset( $entry['_ppm_image_title'] ) )
+		        $image_title = $entry['_ppm_image_title'];
+    
+    	return $image_title;
+}
+
+
+// Sizes and Prices
+add_filter( 'gform_pre_render_51', 'populate_prices' );
+add_filter( 'gform_pre_validation_51', 'populate_prices' );
+add_filter( 'gform_pre_submission_filter_51', 'populate_prices' );
+add_filter( 'gform_admin_pre_render_51', 'populate_prices' );
+function populate_prices( $form ) {
+
+    foreach ( $form['fields'] as &$field ) {
+
+        if ( $field->type != 'select' || strpos( $field->cssClass, 'populate-prices' ) === false ) {
+            continue;
+        }
+
+        // you can add additional parameters here to alter the posts that are retrieved
+        // more info: [http://codex.wordpress.org/Template_Tags/get_posts](http://codex.wordpress.org/Template_Tags/get_posts)
+        // $prices = get_posts( 'numberposts=-1&post_status=publish' );
+        $prices = get_post_meta( $post->ID, '_ppm_image_size', true );
+
+        $choices = array();
+
+        foreach ( $prices as $price ) {
+            $choices[] = array( 'text' => $post->post_title, 'value' => $price->post_title );
+        }
+
+        // update 'Select a Post' to whatever you'd like the instructive option to be
+        $field->placeholder = 'Select a size and price';
+        $field->choices = $choices;
+
+    }
+
+    return $form;
+}
 ?>

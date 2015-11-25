@@ -130,6 +130,158 @@ abbr{
 	font-weight: normal;
 }
 
+.entry p a{
+	text-decoration: none;
+	border-bottom: 1px solid #5a5a5a;
+}
+
+.entry p a:hover{
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+
+/*PROJECTS*/
+
+
+/*Home*/
+
+.home .projects ul.projects li.project,
+.home .projects-page ul.projects li.project{
+	width: 100%;
+	float: none;
+	margin-bottom: 3em;
+}
+/*Archive*/
+
+.projects .page-title,
+.projects-page .page-title{
+	text-align: center;
+}
+
+.projects .term-description,
+.projects-page .term-description{
+	text-align: center;
+	max-width: 75%;
+	margin: auto;
+	margin-bottom: 2em;	
+
+}
+
+.projects .term-description p,
+.projects-page .term-description p{
+	font-family: "freight-neo-pro", sans-serif !important;
+}
+
+.projects ul.projects li.project,
+.projects-page ul.projects li.project{
+	text-align: center;
+	margin-top: 2em;
+}
+
+.projects ul.projects li.project img,
+.projects-page ul.projects li.project img{
+	border: none;
+	padding: 0;
+	background: none;
+}
+
+.projects ul.projects li.project a h3,
+.projects-page ul.projects li.project a h3{
+	font-family: "freight-display-pro",serif !important;
+	font-size: 24px;
+	color: #5a5a5a;
+	display: inline-block;
+	border-bottom: 1px solid transparent;
+	margin-bottom: 0px;
+}
+
+.projects ul.projects li.project a:hover h3,
+.projects-page ul.projects li.project a:hover h3{
+	text-decoration: none !important;
+	border-bottom: 1px solid #5a5a5a;
+	color: #000;
+}
+
+/*Single*/
+.projects.one-col .entry-media,
+.projects-page.one-col .entry-media{
+	width: 100%;
+	float: none;
+	text-align: center;
+}
+
+.projects.one-col .entry-summary,
+.projects-page.one-col .entry-summary{
+	width: 100%;
+	float: none;
+}
+
+.projects .project h2,
+.projects-page .project h2{
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+.single-project-short-description,
+.home .short-description{
+	max-width: 75%;
+	margin: auto;
+	text-align: center;	
+}
+
+.entry .single-project-short-description p,
+.projects .short-description p{
+	font-size: 16px;
+}
+
+.single-project-description{
+	max-width: 75%;
+	margin: auto;
+	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 80px;
+}
+
+.project-details{
+	text-align: center;
+	clear: both;
+	margin-bottom: 120px;
+}
+.project-details__title{
+
+}
+
+.project-details__img{
+	margin-bottom: 40px;
+}
+
+.project-details__description{
+	margin-top: 20px;
+}
+
+.project-details__buy{
+	font-family: "freight-neo-pro", sans-serif !important;
+	padding: 0;
+	margin-top: 20px;
+	border-bottom: 1px solid #5a5a5a;
+	display: inline-block;
+}
+
+.project-details__buy:hover{
+	border-bottom: 1px solid transparent;
+	text-decoration: none;
+}
+
+.post-entries{
+
+}
+
+.post-entries .nav-prev,
+.post-entries .nav-next{
+	font-family: "freight-neo-pro", sans-serif !important;
+	font-size: 16px;
+}
+
 /*Footer*/
 
 #footer {
@@ -207,7 +359,14 @@ abbr{
 	font-family: "freight-display-pro",serif !important;
 }
 
-.gform_wrapper .gform_body .gform_fields .gfield input[type=text] {
+.gform_wrapper .gform_body .gform_fields .gfield .gfield_label {
+	font-family: "freight-neo-pro", sans-serif;
+	font-size: 14px; 
+}
+
+.gform_wrapper .gform_body .gform_fields .gfield input[type=text],
+.gform_wrapper .gform_body .gform_fields .gfield textarea {
+	font-family: "freight-display-pro",serif !important;
 	background-color: #f7f7f7;
 	border: none;
 	border-bottom: 1px solid #5a5a5a;
@@ -220,6 +379,7 @@ abbr{
 	padding-top: 0px;
 	margin-top: 0px;
 }
+
 
 .gform_wrapper .gform_footer input[type=submit] {
 	font-family: "freight-neo-pro", sans-serif;
@@ -252,3 +412,14 @@ abbr{
 	text-align: center;
 }
 
+/*Contact Form*/
+#gform_wrapper_2 .gform_body .gform_fields .gfield input[type=text],
+#gform_wrapper_2 .gform_body .gform_fields .gfield textarea{
+	background: #fff;
+}
+
+/*Enquiry Form*/
+#gform_wrapper_3 .gform_body .gform_fields .gfield input[type=text],
+#gform_wrapper_3 .gform_body .gform_fields .gfield textarea{
+	background: #fff;
+}
