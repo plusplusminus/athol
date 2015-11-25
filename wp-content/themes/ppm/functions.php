@@ -358,8 +358,10 @@ function projects_meta () {
 	            	<p>Size: <?php echo implode(" &mdash; ",$entry['_ppm_image_size']); ?></p>
 	            <?php } ?>
 	            <?php if ($image_buy == "on") { ?>
-	            	<a class="project-details__buy" href="http://localhost/athol/purchase-enquiry/">Buy Now</a>
+	            	<a role="button" class="project-details__buy" data-toggle="modal" data-target="#myModal">Buy Now</a>
 				<?php } ?>
+				<!-- Button trigger modal -->
+
 	        </div>
 	        <?php 
         }
@@ -368,6 +370,7 @@ function projects_meta () {
 
 // Gravity forms dynamic population
 // Image Title
+
 add_filter( 'gform_field_value_image_title', 'my_custom_population_function' );
 function my_custom_population_function( $value ) {
 	    global $post;

@@ -265,6 +265,7 @@ abbr{
 	margin-top: 20px;
 	border-bottom: 1px solid #5a5a5a;
 	display: inline-block;
+	cursor: pointer;
 }
 
 .project-details__buy:hover{
@@ -352,10 +353,13 @@ abbr{
 
 /*All Forms*/
 
+.gform_wrapper{
+	margin-right: 0px;
+	max-width: 100% !important;
+}
 .gform_wrapper .gform_heading {
 	font-size: 20px;
 	text-align: center;
-	width: 100% !important;
 	font-family: "freight-display-pro",serif !important;
 }
 
@@ -373,6 +377,8 @@ abbr{
 	border-radius: 0px;
 	padding: 15px 20px;
 	font-size: 16px;
+	box-sizing: border-box;
+	width: 100%;
 }
 
 .gform_wrapper .gform_footer{
@@ -393,15 +399,19 @@ abbr{
     -webkit-box-shadow: none;
     border-radius: 0;
     padding: 0px;
+    border-bottom: 1px solid #5a5a5a;
 }
 .gform_wrapper .gform_footer input[type=submit]:hover {
-	border-bottom: 1px solid #5a5a5a;
+	border-bottom: 1px solid transparent;
 }
 
 /*Newsletter Form*/
 
 #gform_wrapper_1{
 	max-width: 100%;
+}
+#gform_wrapper_1 .gform_header{
+	width: 100% !important;
 }
 
 #gform_wrapper_1 .gform_footer {
@@ -410,6 +420,11 @@ abbr{
 
 #gform_wrapper_1 .gform_body .gform_fields .gfield .ginput_container {
 	text-align: center;
+}
+
+#gform_wrapper_1 .gform_body .gform_fields .gfield input[type=text],
+#gform_wrapper_1 .gform_body .gform_fields .gfield textarea{
+	width: 47.5%;
 }
 
 /*Contact Form*/
@@ -422,4 +437,21 @@ abbr{
 #gform_wrapper_3 .gform_body .gform_fields .gfield input[type=text],
 #gform_wrapper_3 .gform_body .gform_fields .gfield textarea{
 	background: #fff;
+}
+
+
+/*Modal*/
+.modal-header{
+	background: #f7f7f7;
+	padding: 1em 2em 1em 2em;
+}
+
+.modal-header .close{
+	color: #5a5a5a;
+	background: none;
+	border: none;
+}
+.modal-body{
+	padding: 1em 2em 2em 2em;
+	background: #f7f7f7;
 }

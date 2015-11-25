@@ -121,5 +121,3 @@ if ( jQuery( 'body' ).hasClass( 'has-lightbox' ) && ! jQuery( 'body' ).hasClass(
 }
 
 }); // End jQuery()
-
-
