@@ -151,9 +151,14 @@ function ppm_register_repeatable_group_field_metabox() {
 
 	$cmb_group->add_group_field( $group_field_id, array(
 		'name'        => __( 'Image Description', 'cmb2' ),
-		'description' => __( 'Insert image description.', 'cmb2' ),
 		'id'          => $prefix . 'image_description',
 		'type'        => 'textarea_small',
+	) );
+
+	$cmb_group->add_group_field( $group_field_id, array(
+		'name'        => __( 'Exhibition Name', 'cmb2' ),
+		'id'          => $prefix . 'image_exhibition',
+		'type'        => 'text',
 	) );
 
 	$cmb_group->add_group_field( $group_field_id, array(
@@ -330,6 +335,9 @@ function projects_meta () {
 	   	if ( isset( $entry['_ppm_image_description'] ) )
 	        $image_description = $entry['_ppm_image_description'];
 
+	   	if ( isset( $entry['_ppm_image_exhibition'] ) )
+	        $image_exhibition = $entry['_ppm_image_exhibition'];
+
     	if ( isset( $entry['_ppm_image_size'] ) )
 			$image_size = $entry['_ppm_image_size'];
 
@@ -342,7 +350,9 @@ function projects_meta () {
 			<div class="project-details">
 				<?php echo $img; ?>
 	            <h3 class="project-details__title">Title: <?php echo $image_title; ?></h3>
-	            <p>Collection: Collection Name Here XXX</p>
+	            <?php if ( isset( $entry['_ppm_image_exhibition'] ) ) { ?>
+	            	<p>Exhibition: <?php echo $image_exhibition; ?></p>
+	            <?php } ?>
 	            <p class="project-details__description"><?php echo $image_description; ?></p>
 	            <?php if ( isset( $entry['_ppm_image_size'] ) ) { ?>
 	            	<p>Size: <?php echo implode(" &mdash; ",$entry['_ppm_image_size']); ?></p>
